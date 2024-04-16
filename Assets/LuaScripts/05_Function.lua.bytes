@@ -1,0 +1,47 @@
+﻿-- 函数
+
+--[[
+optional_function_scope function function_name( argument1, argument2, argument3..., argumentn)
+    function_body
+    return result_params_comma_separated
+end
+]]--
+-- 普通
+function fun_a(a, b)
+    print(a, b)
+end 
+
+-- 可变
+function fun_b(...) 
+    --local a,b,c = ... 
+    --print(a, b, c)
+    print(...)
+end
+
+-- 多返回
+function fun_c(a, b)
+    local str = a .. "world"
+    local num = b + 5
+    return str, num
+end
+
+
+--作为参数，普通函数、匿名函数
+lun_function = CS.EmmyLua.LuaFunctionAdd()
+
+num = lun_function:Add(2, 3)
+
+function fun_d()
+    print(num)
+end
+
+function fun_add(a, b)
+    return a + b
+end
+
+function fun_f(a, b, fun) 
+    local result = fun(a, b)
+    print("result:" .. result)
+end
+
+--fun_f(1, 2, fun_add)
