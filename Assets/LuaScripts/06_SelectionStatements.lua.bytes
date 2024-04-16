@@ -1,0 +1,56 @@
+﻿--[[
+if 条件句
+if true then
+
+elseif 条件 then
+
+else
+
+end
+空为假，非空为真
+]]
+
+a = 5
+if a > 0 then
+    print("num > 0")
+else
+    print("num < 0")
+end
+--[[
+循环句
+while ... do 相当于 while
+repeat ... until 相当于 do while
+for 数值
+for 泛型
+跳出：break goto
+]]
+
+a = 3
+while a > 0 do
+    print(a)
+    a = a - 1
+end
+a = 3
+repeat
+    print("repeat" .. a)
+    a = a - 1
+until a <= 0
+
+--[[
+for数字：
+参数1：初始值
+参数2：条件值 相当于 初始值 < 条件值
+参数3：增量
+]]
+-- goto 不建议用，flag 用 ::flag:: 包裹
+for i = 10, 100, 20 do
+    print("for数字" .. i)
+    if i == 50 then
+        print("break 循环")
+        break
+    end
+end 
+--[[
+for泛型：进阶里
+]]
+
