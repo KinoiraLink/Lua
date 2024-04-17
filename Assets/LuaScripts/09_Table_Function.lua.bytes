@@ -1,0 +1,41 @@
+﻿-- table的操作都是针对数组的，map会被忽略掉
+mixture = { "hello", "fuck", "world", name = "张三", age = 23 }
+-- table.concat 连接数组元素
+print(table.concat(mixture, "-", 1, 3))
+-- LUA: hello-fuck-world
+
+-- table.unpack 拆包数组
+print(table.unpack(mixture, 2))
+--LUA: fuck	world
+
+-- table.pack 打包成数组,定义数组推荐方法
+word = table.pack("hello", "fuck", "world")
+print(word[1])--LUA: hello
+print(word.n)--LUA: 3
+print(mixture.n)--LUA: nil
+-- table.maxn 返回数组最大索引值 lua  54 53 下没有
+for i, v in ipairs(word) do
+    print(v)
+end
+
+-- table.insert
+-- table.insert并不会增加 n 
+table.insert(word, 3, "shit")
+print(word[4])--LUA: world
+print(word.n)--LUA: 3
+print(table.concat(word, "-"))
+
+-- table.remove 删除指定位置
+table.remove(word, 4)
+print(table.concat(word, "-"))
+
+-- table.sort 排序,默认按字母排序
+-- 数值和字符串混合，排序会报错
+table.sort(word)
+print(table.concat(word, "-"))
+--LUA: fuck-hello-shit
+table.sort(word, function(a, b) 
+    return a > b 
+end)
+print(table.concat(word, "-"))
+--LUA: shit-hello-fuck

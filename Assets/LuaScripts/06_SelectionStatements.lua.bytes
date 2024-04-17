@@ -51,6 +51,6 @@ for i = 10, 100, 20 do
     end
 end 
 --[[
-for泛型：进阶里
+for泛型：和迭代器一起使用 类似 foreach 
 ]]
 

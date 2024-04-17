@@ -1,0 +1,13 @@
+﻿--[[
+pairs(table)：迭代table的数组元素
+ipairs(table)：迭代整个table
+]]
+
+word = { "hello", "fuck", "world", name = "张三" }
+for i, v in ipairs(word) do
+    print(i, v)
+end
+
+for i, v in pairs(word) do
+    print(i, v)
+end

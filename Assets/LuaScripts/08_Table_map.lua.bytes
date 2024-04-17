@@ -1,0 +1,41 @@
+﻿
+-- map
+-- 一条数据
+emp = { name = "张三", age = 23 }
+
+-- 下标操作
+emp["gender"] = "男性"
+print(emp["name"])
+
+-- 点号操作
+emp.office = "2nd floor"
+print(emp.age)
+-- 表达式用 [] 括起
+emp_expire = 
+{ 
+    ["name"] = "张四", 
+    ["age"] = 23 
+}
+
+print(emp_expire.name)
+
+--数组和map混合
+--key-value 不会占用数组的数字索引值
+--数组和map混合，各论各的
+mixture = { "hello", "fuck", "world", name = "张三", age = 23 }
+
+print(mixture[1])
+print(mixture[4])--out: nil
+print(mixture.name)
+
+
+emps = {
+    { name = "张三", age = 23 },
+    { name = "张二", age = 24 },
+    { name = "张一", age = 25 },
+    { name = "张四", age = 26 },
+    { name = "张五", age = 27 },
+}
+
+print(emps[3].name)
+

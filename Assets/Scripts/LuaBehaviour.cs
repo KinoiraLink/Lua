@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using XLua;
 
 namespace EmmyLua
@@ -18,6 +19,13 @@ namespace EmmyLua
             meta.Dispose();
             luaScriptsEnv.Set("self",this);
             Main.luaEnv.DoString(luaScript.text,luaScript.name,luaScriptsEnv);
+        }
+
+        private void OnDestroy()
+        {
+            
+            luaScriptsEnv.Dispose();
+            luaScriptsEnv = null;
         }
     }
 }

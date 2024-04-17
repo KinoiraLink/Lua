@@ -44,5 +44,6 @@ public class Main : MonoBehaviour
     private void OnDestroy()
     { 
         _luaScriptsEnv.Dispose();
+        _luaScriptsEnv = null;
     }
 }

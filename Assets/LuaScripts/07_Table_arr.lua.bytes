@@ -1,0 +1,40 @@
+﻿--[[
+Table
+索引和key相通
+- 数组
+索引从1开始
+自动扩容 
+相当于 List
+- map
+相当于一条数据
+
+元素不能为 nil
+]]
+--数组联合map使用：数据库的那种表
+
+words = { "hello", "fuck", "world" }
+
+for i = 1, 3 do
+    print(words[i])
+end
+
+-- 二维数组
+
+-- 声明一个空数组
+
+arr = {}
+
+for i = 1, 3 do 
+    arr[i] = {}
+    for j = 1, 2 do
+        arr[i][j] = i * j;
+    end
+end
+
+
+for i = 1, 3 do
+    for j = 1, 2 do
+        print(arr[i][j])
+    end
+end
+
