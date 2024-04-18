@@ -12,6 +12,7 @@ namespace EmmyLua
         
         private void Awake()
         {
+
             luaScriptsEnv =  Main.luaEnv.NewTable();
             LuaTable meta = Main.luaEnv.NewTable();
             meta.Set("__index", Main.luaEnv.Global);

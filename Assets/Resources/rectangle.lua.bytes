@@ -1,0 +1,38 @@
+--[[
+模块类似于一个封装库，从 Lua 5.1 开始，Lua 加入了标准的模块管理机制，可以把一些公用的代码放在一个文件里，以 API 接口的形式在其他地方调用，有利于代码的重用和降低代码耦合度。
+Lua 的模块是由变量、函数等已知元素组成的 table，
+
+--require 加载模块
+]]
+
+--声明
+
+rectangle = {}
+
+-- 添加变量
+
+rectangle.pi = 3.14
+-- 添加函数
+function rectangle.perimeter(a, b)
+    return (a + b) * 2
+end
+
+-- 添加匿名函数
+
+rectangle.area = function(a, b)
+    return a * b
+end
+
+--非成员变量函数
+-- 私用函数要在，公有函数前
+local function circle_area(r)
+    return rectangle.pi * r * r
+end
+
+function get_circle_area(r)
+    return circle_area(r)
+end
+
+
+
+return rectangle
