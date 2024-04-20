@@ -1,0 +1,58 @@
+﻿--[[
+coroutine
+类似 Unity 的协程
+
+协程的线程任意时刻只能唯一
+
+Type : thread
+Function:
+- create(function)
+- resume(thread,...)
+- running()
+- yield()
+- status(thread)
+- close()
+- wrap(function) 同样创建协程，使用时创建实例，协同函数
+]]
+function cor_add(a, b)
+        
+    local rel = 0 
+    print("协程已启动")
+    print("协程将等待")
+    rel = a
+    --挂起等待,这里的参数有点 out 的意味,传出结果，而 b 重新赋值,是传入的第一个参数
+    b = coroutine.yield(rel)
+    print("协程已经恢复")
+    rel = rel + b
+    return rel --最终的返回值，由return返回
+end
+
+crt = coroutine.create(cor_add)
+
+status, result = coroutine.resume(crt, 5, 8)
+
+print("crt类型:" .. type(crt))
+
+print(coroutine.status(crt))--LUA: suspended
+print(result)--LUA: 5
+--恢复协程
+print("协程将恢复")
+status, result = coroutine.resume(crt, 5, 9)--这里还需要再获取一边结果
+
+print(coroutine.status(crt))--LUA: dead
+
+-- 再恢复过程中重新传入值，结果发生了改变
+print(result)--LUA: 10 最后的值由return返回
+
+-- 协同函数
+
+cor_func = coroutine.wrap(function(a, b)
+    th = coroutine.running()
+    print(th)--LUA: thread: 0000025B4CBCDE98
+    return a + b
+end)
+
+rel = cor_func(1, 2)
+
+print(rel)-- LUA: 3
+-- 如果协同函数挂起，恢复时不需要 resume ，再一次调用 function 就行 

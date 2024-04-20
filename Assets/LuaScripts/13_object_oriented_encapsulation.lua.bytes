@@ -1,0 +1,40 @@
+﻿animal = {
+    name = "none",
+    age = 0
+}
+
+
+function animal:new(obj)
+    local object = obj or {}--local确定对象的唯一
+    --指向 Animal
+    --为新表指定元表为当前基础类表
+    setmetatable(object, { __index = self })
+    --相当于返回这个类的对象,相当于不等于等于，object 依旧是table 而不是对象，它可以随意扩充
+    return object 
+end
+
+
+function animal:hop()
+    print(self.name .. "跳跳")
+end
+
+function animal:run()
+    print(self.name .. "跑跑")
+end
+
+cat = animal:new()
+mouse = animal:new({ name = "小枝" })
+
+cat.name = "小橘"
+
+cat.age = 5
+
+cat:hop()
+
+mouse.age = 3
+
+mouse:run()
+
+
+-- lua 不能实现多态 
+

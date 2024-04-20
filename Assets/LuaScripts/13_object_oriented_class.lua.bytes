@@ -1,0 +1,31 @@
+﻿--[[
+lua 中没有类的概念，只有通过 table、function、metatable 来模拟
+]]
+
+-- table 为对象的属性 Key-Value
+
+animal = {
+    name = "小橘",
+    age = 5
+}
+
+-- function 为对象的方法 Key-Value
+-- self 相当于 this
+animal.bark = function(self, voice)
+    print(self.name .. "在" .. voice .. "叫")
+end
+
+function animal.paw(self)
+    print(self.name .. "在挠")
+end
+
+-- 推荐用法，类似成员函数
+function animal:hop()
+    print(self.name .. "跳跳")
+    
+end
+
+animal.bark(animal, "喵")
+animal.paw(animal)
+animal:hop()
+

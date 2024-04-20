@@ -1,0 +1,85 @@
+﻿-- https://www.lua.org/manual/5.3/ 下的 metamethods
+-- 元数据表
+-- 描述数据的数据
+-- 元方法，描述元表中定义的普通表的默认行为 比如 __tostring
+-- 每个普通表都有一个元表，元表的元方法用于扩展该普通table的行为功能
+-- 重要函数
+-- setmetatable(table,metatable)：设置元表，最常用的
+-- getmetatable(table)：获取元表
+require "metafile"
+word = { "hello", "fuck", "world" }
+
+print(word)--LUA: table: 0000016E24584510
+
+-- __index： 访问数组索引或key不存在时
+
+-- eg:最大的例子是 xLua全局虚拟机环境设置那一段
+-- 元表，但现在是一个普通表
+meta = {}
+-- 进行关联，现在 meta 已经是元表
+setmetatable(word, meta)
+-- 用法一：
+meta.__index = function(tab, key)
+    return "数据不存在"
+end
+print(word[4])--LUA: 数据不存在
+
+vocabulary = {}
+
+vocabulary[4] = "shit"
+
+vocabulary[5] = "Holy" 
+-- 用法二：
+meta.__index = vocabulary
+print(word[4])--LUA: shit
+
+
+-- newindex 赋值数组索引或key不存在时
+-- 用法一：丰富赋值信息
+function meta.__newindex(tab, key, value)
+
+    rawset(tab, key, value)--写入数据
+    print("新增数据" .. "Key:" .. key .. ",Value:" .. value)
+end
+
+word[6] = "Crazy"
+
+print(word[6])
+
+-- 用法二：缓存新数据
+meta.__newindex = vocabulary 
+
+word[7] = "jerk"
+
+print(word[7])--LUA: jerk,从这里看出，方法一被方法二覆盖
+print(vocabulary[7])--LUA: jerk
+
+--[[
+meta.__newindex 从这里可以看出，元方法是作为元表的数据存在的
+
+]]
+-- meta.__tostring 访问表时
+-- 来源于：https://www.runoob.com/lua/lua-metatables.html
+my_table = setmetatable({ 10, 20, 30 }, {
+    __tostring = function(my_table)
+        sum = 0
+        for k, v in pairs(my_table) do
+            sum = sum + v
+        end
+        return "表所有元素的和为 " .. sum
+    end
+})
+print(my_table)
+
+
+-- __call，将一个 table 当作含参函数来使用时,函数的具体功能逻辑
+
+mixture = { "hello", "fuck", "world", name = "张三", age = 23 }
+
+-- 导入metafile,依旧可以在此文件中修改
+setmetatable(mixture, metafile)
+
+get_mixture = mixture(3, "hi")
+print(table.unpack(get_mixture))--LUA: hellohi	fuckhi	worldhi
+print(get_mixture.age)--LUA: 26
+
