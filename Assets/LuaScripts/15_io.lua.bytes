@@ -1,0 +1,36 @@
+﻿extension = CS.EmmyLua.UnityExtensionMethods
+--[[
+在 Xlua 中 lua 不能加载除 lua 文件以外的其它文件，只能通过 Unity Api 或者 C# IO 来间接读写
+lua 中 也没有 TextAsset 对应的类型
+]]
+local asset_text = extension.GetTextAsset("ohayo")
+print(asset_text)
+local io_text = extension.ReadFileText("ohayo.txt");
+print(io_text)
+--[[
+file = io.open("ohayo")
+--io.input(file)
+--io.read()
+++str = file:read("*l")
+--io.close(file)
+++file:close()
+
+file = io.open("ohayo","a")
+--io.output(file)
+--io.write("\ndidadidadi")
+++file:write("\ndidadidadi")
+--io.close(file)
+++file:close()
+]]
+--[[
+--file:seek
+
+file = io.open("ohayo","r")
+pos = file:seek()
+print(pos)
+
+file.read("*l")
+pos = file:seek()
+print(pos)
+]]
+
